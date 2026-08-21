@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1672" height="941" viewBox="0 0 1672 941" role="img" aria-labelledby="title desc">
+  <title id="title">究極の2択ワカリテ</title>
+  <desc id="desc">本人も悩みまくる究極の2択診断のサムネイル</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff7f5"/>
+      <stop offset="0.45" stop-color="#fff0d6"/>
+      <stop offset="1" stop-color="#f2edff"/>
+    </linearGradient>
+    <linearGradient id="hot" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ff5d6c"/>
+      <stop offset="0.52" stop-color="#ff9f43"/>
+      <stop offset="1" stop-color="#7b61ff"/>
+    </linearGradient>
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="18" stdDeviation="22" flood-color="#24124d" flood-opacity="0.16"/>
+    </filter>
+  </defs>
+  <rect width="1672" height="941" rx="34" fill="url(#bg)"/>
+  <rect x="18" y="18" width="1636" height="905" rx="28" fill="none" stroke="#ff8f9b" stroke-width="8"/>
+  <circle cx="155" cy="150" r="170" fill="#ffdce2" opacity="0.65"/>
+  <circle cx="1530" cy="805" r="210" fill="#e5dcff" opacity="0.7"/>
+  <circle cx="1422" cy="138" r="84" fill="#fff" opacity="0.58"/>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="18" opacity="0.9">
+    <path d="M172 382l44 44 86-106" stroke="#ff5d6c"/>
+    <path d="M1398 310l44 44 86-106" stroke="#7b61ff"/>
+  </g>
+  <g filter="url(#softShadow)">
+    <rect x="402" y="96" width="868" height="126" rx="63" fill="#fff"/>
+    <text x="836" y="174" text-anchor="middle" font-family="Hiragino Sans, Yu Gothic, sans-serif" font-size="54" font-weight="900" fill="#ff5d6c">本人も悩みまくる!?</text>
+  </g>
+  <text x="836" y="394" text-anchor="middle" font-family="Hiragino Sans, Yu Gothic, sans-serif" font-size="116" font-weight="900" fill="#201a2e">究極の</text>
+  <text x="836" y="560" text-anchor="middle" font-family="Hiragino Sans, Yu Gothic, sans-serif" font-size="184" font-weight="900" fill="url(#hot)">2択</text>
+  <text x="836" y="708" text-anchor="middle" font-family="Hiragino Sans, Yu Gothic, sans-serif" font-size="84" font-weight="900" fill="#201a2e">ワカリテ診断</text>
+  <g transform="translate(506 758)">
+    <rect width="660" height="94" rx="47" fill="#fff" stroke="#ff8f9b" stroke-width="6"/>
+    <text x="330" y="62" text-anchor="middle" font-family="Hiragino Sans, Yu Gothic, sans-serif" font-size="44" font-weight="900" fill="#201a2e">10〜50問でチェック</text>
+  </g>
+  <g fill="#ffd166">
+    <path d="M260 596l22 48 52 6-39 34 11 51-45-27-46 26 12-51-38-35 52-5z"/>
+    <path d="M1322 604l18 39 42 5-31 28 9 42-37-22-37 21 10-41-31-28 42-5z"/>
+  </g>
+  <g fill="#ff6f91" opacity="0.78">
+    <circle cx="234" cy="748" r="15"/>
+    <circle cx="326" cy="210" r="11"/>
+    <circle cx="1334" cy="214" r="13"/>
+    <circle cx="1458" cy="698" r="16"/>
+  </g>
+</svg>

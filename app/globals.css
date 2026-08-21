@@ -1,0 +1,119 @@
+@import url("https://fonts.googleapis.com/css2?family=LINE+Seed+JP:wght@400;700;800&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color: #283044;
+  background: #fbfcff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  color: #283044;
+  font-family: "LINE Seed JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.2) 18%, rgba(255, 255, 255, 0.2) 82%, rgba(255, 255, 255, 0.72)),
+    radial-gradient(circle at top left, rgba(139, 216, 255, 0.24), transparent 34rem),
+    radial-gradient(circle at top right, rgba(255, 119, 183, 0.18), transparent 28rem),
+    radial-gradient(circle at bottom left, rgba(167, 139, 250, 0.16), transparent 30rem),
+    #fbfcff;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+::selection {
+  background: rgba(255, 119, 183, 0.25);
+}
+
+.phone-stage {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(246, 251, 255, 0.78)),
+    repeating-linear-gradient(135deg, rgba(255, 119, 183, 0.055) 0 1px, transparent 1px 20px),
+    linear-gradient(135deg, rgba(139, 216, 255, 0.18), rgba(255, 255, 255, 0.2) 42%, rgba(255, 119, 183, 0.12));
+  backdrop-filter: blur(8px);
+}
+
+.hero-pop {
+  background:
+    linear-gradient(135deg, rgba(255, 119, 183, 0.2), rgba(255, 255, 255, 0.78) 42%, rgba(139, 216, 255, 0.22)),
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.28) 0 1px, transparent 1px 18px);
+}
+
+.diagnosis-card {
+  position: relative;
+  overflow: hidden;
+  border: 2px solid rgba(255, 255, 255, 0.95);
+  border-radius: 30px;
+  padding: 1.25rem;
+  box-shadow:
+    0 18px 48px rgba(87, 93, 139, 0.13),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.58);
+}
+
+.diagnosis-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 7px;
+  background: var(--diagnosis-accent);
+}
+
+.diagnosis-card-standard {
+  --diagnosis-accent: linear-gradient(90deg, #ff77b7, #8bd8ff);
+  background:
+    linear-gradient(135deg, rgba(255, 119, 183, 0.18), rgba(255, 255, 255, 0.86) 44%, rgba(139, 216, 255, 0.2)),
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.3) 0 1px, transparent 1px 18px);
+}
+
+.diagnosis-card-vtuber {
+  --diagnosis-accent: linear-gradient(90deg, #23a7f2, #ff77b7);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(238, 248, 255, 0.9) 48%, rgba(255, 240, 247, 0.96)),
+    radial-gradient(circle at 15% 12%, rgba(35, 167, 242, 0.12), transparent 34%),
+    radial-gradient(circle at 88% 8%, rgba(255, 119, 183, 0.16), transparent 32%);
+}
+
+.diagnosis-card-private {
+  --diagnosis-accent: linear-gradient(90deg, #ff8a4d, #ff6fae);
+  background:
+    linear-gradient(135deg, rgba(255, 250, 245, 0.96), rgba(255, 239, 247, 0.92) 48%, rgba(255, 248, 232, 0.96)),
+    radial-gradient(circle at 16% 10%, rgba(255, 138, 77, 0.14), transparent 34%),
+    radial-gradient(circle at 88% 12%, rgba(255, 111, 174, 0.14), transparent 32%);
+}
+
+.diagnosis-card-ultimate {
+  --diagnosis-accent: linear-gradient(90deg, #ff5d6c, #ffd166, #7b61ff);
+  background:
+    linear-gradient(135deg, rgba(255, 246, 241, 0.98), rgba(255, 249, 226, 0.92) 46%, rgba(245, 241, 255, 0.96)),
+    radial-gradient(circle at 16% 10%, rgba(255, 93, 108, 0.13), transparent 34%),
+    radial-gradient(circle at 88% 12%, rgba(123, 97, 255, 0.13), transparent 32%);
+}
+
+.title-pop {
+  text-shadow: 0 3px 0 rgba(255, 255, 255, 0.92);
+}
+
+.diagnosis-title {
+  font-size: 2rem;
+  font-weight: 900;
+  line-height: 1.08;
+  letter-spacing: 0;
+  text-shadow: 0 3px 0 rgba(255, 255, 255, 0.92);
+}
+
+@media (min-width: 640px) {
+  .diagnosis-title {
+    font-size: 2.5rem;
+    line-height: 1.02;
+  }
+}
