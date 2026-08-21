@@ -49,7 +49,7 @@ export default function CreateVtuberPage() {
                 setError("");
               }}
               maxLength={20}
-              placeholder="例：ワカリテちゃん"
+              placeholder="例：ワカリテ"
               className="min-h-14 rounded-2xl border border-slate-200 bg-white px-4 text-base font-bold outline-none transition focus:border-skysoft focus:ring-4 focus:ring-sky-100"
             />
           </label>
