@@ -8,7 +8,7 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3001";
 const siteTitle = "ワカリテ｜私とあなたのワカリテ診断";
 const siteDescription =
   "ワカリテは、友達や恋人がどれだけあなたを理解しているかを診断できる無料の理解度チェックサービスです。2択・4択の診断を作成し、リンク共有とランキングで楽しめます。";
-const topOgpImage = "/wakarite-ogp.png";
+const topOgpImage = "/wakarite-ogp.png?v=20260822";
 
 export const metadata: Metadata = {
   title: siteTitle,
@@ -28,6 +28,7 @@ export const metadata: Metadata = {
         url: topOgpImage,
         width: 1920,
         height: 1080,
+        type: "image/png",
         alt: "ワカリテ｜私とあなたのワカリテ診断"
       }
     ]

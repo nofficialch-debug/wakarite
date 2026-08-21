@@ -7,6 +7,7 @@ const gaId = process.env.NEXT_PUBLIC_GA_ID;
 const siteTitle = "ワカリテ｜私とあなたのワカリテ診断";
 const siteDescription =
   "ワカリテは、友達や恋人がどれだけあなたを理解しているかを診断できる無料の理解度チェックサービスです。2択・4択のオリジナル診断を作成し、リンクを共有してワカリテ度をランキングで楽しめます。";
+const ogpImageUrl = "/wakarite-ogp.png?v=20260822";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -31,9 +32,10 @@ export const metadata: Metadata = {
     locale: "ja_JP",
     images: [
       {
-        url: "/wakarite-ogp.png",
+        url: ogpImageUrl,
         width: 1920,
         height: 1080,
+        type: "image/png",
         alt: "ワカリテ"
       }
     ]
@@ -42,7 +44,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: siteTitle,
     description: siteDescription,
-    images: ["/wakarite-ogp.png"]
+    images: [ogpImageUrl]
   }
 };
 
