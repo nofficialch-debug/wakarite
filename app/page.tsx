@@ -1,7 +1,44 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import { AppShell } from "@/components/AppShell";
 import { ButtonLink } from "@/components/Button";
 import { Card } from "@/components/Card";
+
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3001";
+const siteTitle = "ワカリテ｜私とあなたのワカリテ診断";
+const siteDescription =
+  "ワカリテは、友達や恋人がどれだけあなたを理解しているかを診断できる無料の理解度チェックサービスです。2択・4択の診断を作成し、リンク共有とランキングで楽しめます。";
+const topOgpImage = "/wakarite-ogp.png";
+
+export const metadata: Metadata = {
+  title: siteTitle,
+  description: siteDescription,
+  alternates: {
+    canonical: siteUrl
+  },
+  openGraph: {
+    title: siteTitle,
+    description: siteDescription,
+    type: "website",
+    url: siteUrl,
+    siteName: "ワカリテ",
+    locale: "ja_JP",
+    images: [
+      {
+        url: topOgpImage,
+        width: 1920,
+        height: 1080,
+        alt: "ワカリテ｜私とあなたのワカリテ診断"
+      }
+    ]
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteTitle,
+    description: siteDescription,
+    images: [topOgpImage]
+  }
+};
 
 const steps = [
   {
