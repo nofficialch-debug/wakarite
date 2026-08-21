@@ -12,6 +12,9 @@ export const metadata: Metadata = {
   description: siteDescription,
   applicationName: "ワカリテ",
   keywords: ["ワカリテ", "診断", "理解度診断", "友達診断", "恋人診断", "相性診断", "2択診断", "4択診断", "性格診断", "クイズ作成"],
+  verification: {
+    google: "bVtR2_Xu9GfdS9SRmn1dugZLgug-1AmHNYg0kk8MH-k"
+  },
   icons: {
     icon: "/favicon.png",
     shortcut: "/favicon.png",
