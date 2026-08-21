@@ -3,8 +3,10 @@ import { AppShell } from "@/components/AppShell";
 import { Card } from "@/components/Card";
 import { findQuizBySlug, listAnswerStats, listAttempts, listQuestions } from "@/lib/data";
 import type { Attempt, Question, Quiz } from "@/lib/types";
+import ManageShareActions from "./ManageShareActions";
 
 export const dynamic = "force-dynamic";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://wakarite.shirume.me";
 
 function rank(attempts: Attempt[], index: number): number {
   if (index === 0) return 1;
@@ -34,6 +36,7 @@ export default async function ManagePage({
   const average = typedAttempts.length
     ? Math.round(typedAttempts.reduce((sum, attempt) => sum + attempt.percentage, 0) / typedAttempts.length)
     : 0;
+  const publicUrl = `${siteUrl}/w/${typedQuiz.slug}`;
 
   return (
     <AppShell>
@@ -47,6 +50,8 @@ export default async function ManagePage({
           </h1>
           <p className="font-bold leading-7 text-slate-600">{typedQuiz.creator_name}のワカリテ診断の結果を確認できます。</p>
         </div>
+
+        <ManageShareActions publicUrl={publicUrl} creatorName={typedQuiz.creator_name} />
 
         <div className="grid grid-cols-2 gap-3">
           <Card className="space-y-1">
