@@ -6,7 +6,7 @@ import { getSiteUrl } from "@/lib/site";
 export default function ResultShare({ percentage, slug }: { percentage: number; slug: string }) {
   const text = `ワカリテ度${percentage}%だった！\nあなたは何%とれる？`;
   const url = `${getSiteUrl()}/w/${slug}`;
-  const shareBody = `${text}\n${url}\n#ワカリテ診断`;
+  const shareBody = `${text}\n#ワカリテ診断\n${url}`;
   const encodedText = encodeURIComponent(shareBody);
 
   async function share() {

@@ -12,7 +12,7 @@ export default function CompleteActions({ publicUrl, manageUrl }: { publicUrl: s
     setMessage(`${label}をコピーしました。`);
   }
 
-  const encodedText = encodeURIComponent(`${shareText}\n${publicUrl}\n#ワカリテ診断`);
+  const encodedText = encodeURIComponent(`${shareText}\n#ワカリテ診断\n${publicUrl}`);
 
   return (
     <div className="space-y-4">
