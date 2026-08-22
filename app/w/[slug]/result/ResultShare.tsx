@@ -6,15 +6,16 @@ import { getSiteUrl } from "@/lib/site";
 export default function ResultShare({ percentage, slug }: { percentage: number; slug: string }) {
   const text = `ワカリテ度${percentage}%だった！\nあなたは何%とれる？`;
   const url = `${getSiteUrl()}/w/${slug}`;
-  const encodedText = encodeURIComponent(`${text}\n${url}`);
+  const shareBody = `${text}\n${url}\n#ワカリテ診断`;
+  const encodedText = encodeURIComponent(shareBody);
 
   async function share() {
     if (navigator.share) {
-      await navigator.share({ title: "ワカリテ", text, url });
+      await navigator.share({ title: "ワカリテ", text: `${text}\n#ワカリテ診断`, url });
       return;
     }
 
-    await navigator.clipboard.writeText(`${text}\n${url}`);
+    await navigator.clipboard.writeText(shareBody);
   }
 
   return (

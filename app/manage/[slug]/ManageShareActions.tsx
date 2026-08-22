@@ -6,7 +6,7 @@ import { Button } from "@/components/Button";
 export default function ManageShareActions({ publicUrl, creatorName }: { publicUrl: string; creatorName: string }) {
   const [message, setMessage] = useState("");
   const shareText = `${creatorName}のワカリテ診断を作りました。\nあなたはどれだけわかってる？`;
-  const encodedText = encodeURIComponent(`${shareText}\n${publicUrl}`);
+  const encodedText = encodeURIComponent(`${shareText}\n${publicUrl}\n#ワカリテ診断`);
 
   async function copyLink() {
     await navigator.clipboard.writeText(publicUrl);
