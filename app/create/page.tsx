@@ -30,6 +30,11 @@ export default function CreatePage() {
           <p className="text-sm font-black text-candy">CREATE</p>
           <h1 className="text-3xl font-black">あなたのワカリテを作ろう</h1>
         </div>
+        <img
+          src="/standard-wakarite-thumbnail.png"
+          alt="定番のワカリテ"
+          className="aspect-video w-full rounded-[24px] border border-white/90 object-cover shadow-[0_14px_34px_rgba(35,167,242,0.16)]"
+        />
         <form onSubmit={submit} className="space-y-4">
           <label className="grid gap-2 text-sm font-black">
             あなたの名前・ニックネーム
