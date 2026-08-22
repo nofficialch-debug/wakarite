@@ -13,15 +13,6 @@ export default function ManageShareActions({ publicUrl, creatorName }: { publicU
     setMessage("診断リンクをコピーしました。");
   }
 
-  async function shareLink() {
-    if (navigator.share) {
-      await navigator.share({ title: "ワカリテ診断", text: shareText, url: publicUrl });
-      return;
-    }
-
-    await copyLink();
-  }
-
   return (
     <div className="space-y-3 rounded-[24px] border border-blue-100 bg-gradient-to-br from-white via-sky-50 to-pink-50 p-4 shadow-[0_14px_34px_rgba(35,167,242,0.10)]">
       <div className="space-y-1">
@@ -35,9 +26,6 @@ export default function ManageShareActions({ publicUrl, creatorName }: { publicU
       <div className="grid gap-3">
         <Button type="button" onClick={copyLink}>
           リンクをコピー
-        </Button>
-        <Button type="button" variant="secondary" onClick={shareLink}>
-          シェアする
         </Button>
         <div className="grid grid-cols-2 gap-3">
           <a

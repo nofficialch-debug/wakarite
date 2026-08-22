@@ -12,14 +12,6 @@ export default function CompleteActions({ publicUrl, manageUrl }: { publicUrl: s
     setMessage(`${label}をコピーしました。`);
   }
 
-  async function share() {
-    if (navigator.share) {
-      await navigator.share({ title: "ワカリテ", text: shareText, url: publicUrl });
-      return;
-    }
-    await copy(publicUrl, "リンク");
-  }
-
   const encodedText = encodeURIComponent(`${shareText}\n${publicUrl}`);
 
   return (
@@ -29,21 +21,20 @@ export default function CompleteActions({ publicUrl, manageUrl }: { publicUrl: s
         <Button type="button" onClick={() => copy(publicUrl, "リンク")}>
           リンクをコピー
         </Button>
-        <Button type="button" variant="secondary" onClick={share}>
-          友達に送る
-        </Button>
-        <a
-          href={`https://line.me/R/msg/text/?${encodedText}`}
-          className="inline-flex min-h-12 items-center justify-center rounded-2xl bg-[#06c755] px-5 py-3 text-center font-bold text-white transition hover:-translate-y-0.5"
-        >
-          LINEで送る
-        </a>
-        <a
-          href={`https://twitter.com/intent/tweet?text=${encodedText}`}
-          className="inline-flex min-h-12 items-center justify-center rounded-2xl bg-black px-5 py-3 text-center font-bold text-white transition hover:-translate-y-0.5"
-        >
-          Xでシェア
-        </a>
+        <div className="grid grid-cols-2 gap-3">
+          <a
+            href={`https://line.me/R/msg/text/?${encodedText}`}
+            className="inline-flex min-h-12 items-center justify-center rounded-2xl bg-[#06c755] px-4 py-3 text-center text-sm font-black text-white transition hover:-translate-y-0.5"
+          >
+            LINEで送る
+          </a>
+          <a
+            href={`https://twitter.com/intent/tweet?text=${encodedText}`}
+            className="inline-flex min-h-12 items-center justify-center rounded-2xl bg-black px-4 py-3 text-center text-sm font-black text-white transition hover:-translate-y-0.5"
+          >
+            Xでシェア
+          </a>
+        </div>
       </div>
       {manageUrl ? (
         <div className="space-y-3 rounded-2xl bg-blue-50 p-4 text-left">
