@@ -17,10 +17,12 @@ export default function CompletePage({
     <AppShell showCreateButton={false}>
       <Card className="space-y-6 text-center">
         <div className="space-y-3">
-          <p className="text-5xl">🎉</p>
           <h1 className="text-3xl font-black">ワカリテ完成！</h1>
           <p className="font-bold leading-7 text-slate-600">
             友達に送って、あなたのことをどれくらいわかっているか挑戦してもらおう！
+          </p>
+          <p className="font-black leading-7 text-red-500">
+            下のマイページでみんなの結果を確認できるよ！保存しておいてね！
           </p>
         </div>
         {publicUrl ? (
