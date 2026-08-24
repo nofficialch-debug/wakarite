@@ -29,14 +29,18 @@ export default function CreateVtuberPage() {
       <Card className="space-y-6">
         <div className="space-y-2">
           <p className="text-sm font-black text-sky-500">VTUBER MODE</p>
-          <h1 className="text-3xl font-black leading-tight">VTuberワカリテを作ろう</h1>
+          <h1 className="text-3xl font-black leading-tight">
+            リスナーは当たられる!?
+            <br />
+            2択VTuberワカリテを作ろう
+          </h1>
           <img
-            src="/vtuber-wakarite-thumbnail-v2.png"
-            alt="VTuberワカリテ"
+            src="/vtuber-wakarite-thumbnail-2choice.png"
+            alt="2択VTuberワカリテ"
             className="aspect-video w-full rounded-[24px] border border-white/90 object-cover shadow-[0_14px_34px_rgba(35,167,242,0.16)]"
           />
           <p className="font-bold leading-7 text-slate-600">
-            配信者本人やリスナー向けに、配信ネタ・口ぐせ・推しポイントで盛り上がる2択診断を作れます。
+            リスナーや友達のVTuberにワカリテ診断をやってもらうために、あなたの2択VTuberワカリテを作りませんか？
           </p>
         </div>
         <form onSubmit={submit} className="space-y-4">

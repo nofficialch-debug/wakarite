@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
-const title = "VTuberワカリテを作る｜ワカリテ";
+const title = "2択VTuberワカリテを作る｜ワカリテ";
 const description =
-  "VTuber本人やリスナー向けに、推しのことをどれだけわかっているか楽しめる2択のワカリテ診断を作成できます。";
+  "リスナーや友達のVTuberにワカリテ診断をやってもらうために、あなたの2択VTuberワカリテを作成できます。";
 
 export const metadata: Metadata = {
   title,
@@ -14,10 +14,10 @@ export const metadata: Metadata = {
     siteName: "ワカリテ",
     images: [
       {
-        url: "/vtuber-wakarite-thumbnail-v2.png",
+        url: "/vtuber-wakarite-thumbnail-2choice.png",
         width: 1672,
         height: 941,
-        alt: "VTuberワカリテ"
+        alt: "2択VTuberワカリテ"
       }
     ]
   },
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title,
     description,
-    images: ["/vtuber-wakarite-thumbnail-v2.png"]
+    images: ["/vtuber-wakarite-thumbnail-2choice.png"]
   }
 };
 
