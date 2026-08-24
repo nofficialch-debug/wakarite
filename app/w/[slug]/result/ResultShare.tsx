@@ -1,28 +1,27 @@
 "use client";
 
+import { useState } from "react";
 import { Button } from "@/components/Button";
 import { getSiteUrl } from "@/lib/site";
 
 export default function ResultShare({ percentage, slug }: { percentage: number; slug: string }) {
+  const [message, setMessage] = useState("");
   const text = `ワカリテ度${percentage}%だった！\nあなたは何%とれる？`;
   const url = `${getSiteUrl()}/w/${slug}`;
   const shareBody = `${text}\n#ワカリテ診断\n${url}`;
   const encodedText = encodeURIComponent(shareBody);
 
-  async function share() {
-    if (navigator.share) {
-      await navigator.share({ title: "ワカリテ", text: `${text}\n#ワカリテ診断`, url });
-      return;
-    }
-
+  async function copyLink() {
     await navigator.clipboard.writeText(shareBody);
+    setMessage("結果とリンクをコピーしました。");
   }
 
   return (
     <div className="grid gap-3">
-      <Button type="button" variant="secondary" onClick={share} className="w-full">
-        結果をシェア
+      <Button type="button" variant="secondary" onClick={copyLink} className="w-full">
+        リンクコピー
       </Button>
+      {message ? <p className="text-sm font-black text-candy">{message}</p> : null}
       <div className="grid grid-cols-2 gap-3">
         <a
           href={`https://twitter.com/intent/tweet?text=${encodedText}`}
