@@ -3,40 +3,24 @@ import { notFound } from "next/navigation";
 import { AppShell } from "@/components/AppShell";
 import { Card } from "@/components/Card";
 import { findQuizBySlug, listAttempts, listQuestions } from "@/lib/data";
+import { getDiagnosisConfig } from "@/lib/diagnosis-config";
 import StartChallengeForm from "./StartChallengeForm";
 import type { Attempt, Quiz } from "@/lib/types";
 
 export const dynamic = "force-dynamic";
 
-const bankVisuals = {
-  standard: {
-    image: "/standard-wakarite-thumbnail.png",
-    width: 1672,
-    height: 941,
-    alt: "定番のワカリテ"
-  },
-  vtuber: {
-    image: "/vtuber-wakarite-thumbnail-v2.png",
-    width: 1672,
-    height: 941,
-    alt: "VTuberワカリテ"
-  },
-  private: {
-    image: "/private-wakarite-thumbnail.png",
-    width: 1672,
-    height: 941,
-    alt: "プライベートワカリテ"
-  },
-  ultimate: {
-    image: "/ultimate-wakarite-thumbnail-v2.png",
-    width: 1672,
-    height: 941,
-    alt: "究極の2択ワカリテ"
-  }
-} as const;
-
 function getBankVisual(quiz: Quiz) {
-  return bankVisuals[quiz.bank_type || "standard"];
+  const config = getDiagnosisConfig(quiz.bank_type || "standard");
+  return {
+    image: config.thumbnail,
+    width: 1672,
+    height: 941,
+    alt: config.title
+  };
+}
+
+function isFourChoiceBank(quiz: Quiz) {
+  return !["standard", "vtuber", "ultimate"].includes(quiz.bank_type || "standard");
 }
 
 async function getQuiz(slug: string) {
@@ -49,7 +33,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   const questionCount = (await listQuestions(quiz.id)).length;
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3001";
   const pageUrl = `${siteUrl}/w/${params.slug}`;
-  const choiceLabel = quiz.bank_type === "private" ? "4択診断" : "2択診断";
+  const choiceLabel = isFourChoiceBank(quiz) ? "4択診断" : "2択診断";
   const visual = getBankVisual(quiz);
   const title = `${quiz.creator_name}のワカリテ診断｜ワカリテ`;
   const description = `${quiz.creator_name}のことをどれくらい理解しているか、全${questionCount}問の${choiceLabel}でワカリテ度をチェックしよう。友達や恋人とリンクを共有してランキングで楽しめます。`;

@@ -2,6 +2,7 @@ import "server-only";
 
 import { promises as fs } from "fs";
 import path from "path";
+import { DIAGNOSIS_CONFIGS } from "@/lib/diagnosis-config";
 import { isQuestionBankType } from "@/lib/question-banks";
 import { getServiceSupabase, hasSupabaseEnv } from "@/lib/supabase";
 import type { AnswerKey, Attempt, AttemptAnswer, Question, QuestionBankType, Quiz } from "@/lib/types";
@@ -328,12 +329,10 @@ export async function listAnswerStats(quizId: string) {
 }
 
 function emptyQuestionBankStats(): QuestionBankStats {
-  return {
-    standard: { quizCount: 0, attemptCount: 0 },
-    vtuber: { quizCount: 0, attemptCount: 0 },
-    private: { quizCount: 0, attemptCount: 0 },
-    ultimate: { quizCount: 0, attemptCount: 0 }
-  };
+  return DIAGNOSIS_CONFIGS.reduce((stats, config) => {
+    stats[config.type] = { quizCount: 0, attemptCount: 0 };
+    return stats;
+  }, {} as QuestionBankStats);
 }
 
 export async function getQuestionBankStats(): Promise<QuestionBankStats> {

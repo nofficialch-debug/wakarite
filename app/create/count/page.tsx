@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { AppShell } from "@/components/AppShell";
 import { Card } from "@/components/Card";
+import { getDiagnosisConfig } from "@/lib/diagnosis-config";
 import { getQuestionBankLabel, isQuestionBankType } from "@/lib/question-banks";
-import { PRIVATE_QUESTION_COUNT_OPTIONS, QUESTION_COUNT_OPTIONS, ULTIMATE_QUESTION_COUNT_OPTIONS } from "@/lib/questions";
 import type { QuestionBankType, QuestionCount } from "@/lib/types";
 
 const countDetails: Record<QuestionCount, { label: string; tone: string }> = {
@@ -35,8 +35,7 @@ export default function CreateCountPage() {
     router.push("/create/questions");
   }
 
-  const countOptions =
-    bankType === "private" ? PRIVATE_QUESTION_COUNT_OPTIONS : bankType === "ultimate" ? ULTIMATE_QUESTION_COUNT_OPTIONS : QUESTION_COUNT_OPTIONS;
+  const countOptions = getDiagnosisConfig(bankType).countOptions;
 
   return (
     <AppShell showCreateButton={false}>

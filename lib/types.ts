@@ -2,7 +2,21 @@ export type AnswerKey = "a" | "b" | "c" | "d";
 
 export type QuestionCount = 10 | 20 | 30 | 50 | 75 | 100;
 
-export type QuestionBankType = "standard" | "vtuber" | "private" | "ultimate";
+export type QuestionBankType =
+  | "standard"
+  | "vtuber"
+  | "private"
+  | "ultimate"
+  | "otaku_oshikatsu"
+  | "oshikatsu"
+  | "moshimo"
+  | "renai"
+  | "ura"
+  | "food"
+  | "school"
+  | "work"
+  | "smartphone"
+  | "money";
 
 export type PresetQuestion = {
   question_text: string;

@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { AppShell } from "@/components/AppShell";
 import { ButtonLink } from "@/components/Button";
 import { Card } from "@/components/Card";
+import { ADDITIONAL_DIAGNOSIS_CONFIGS } from "@/lib/diagnosis-config";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3001";
 const siteTitle = "ワカリテ｜私とあなたのワカリテ診断";
@@ -198,6 +199,42 @@ export default function HomePage() {
             VTuberワカリテを作る
           </ButtonLink>
         </div>
+      </section>
+
+      <section className="mt-5 space-y-5">
+        {ADDITIONAL_DIAGNOSIS_CONFIGS.map((diagnosis) => (
+          <div key={diagnosis.type} className={`diagnosis-card ${diagnosis.accentClass}`}>
+            <div className="space-y-5">
+              <div className="flex flex-wrap items-center gap-2">
+                <p className="inline-flex rounded-full bg-white/90 px-4 py-2 text-sm font-black text-candy shadow-[0_10px_24px_rgba(255,119,183,0.14)] ring-1 ring-white">
+                  {diagnosis.label}
+                </p>
+                <p className="inline-flex rounded-full bg-white/70 px-3 py-2 text-xs font-black text-slate-500 ring-1 ring-white/90">
+                  {diagnosis.badge}
+                </p>
+              </div>
+              <div className="space-y-3">
+                <h2 className="diagnosis-title">
+                  {diagnosis.heading.split("\n").map((line, index) => (
+                    <span key={line}>
+                      {line}
+                      {index < diagnosis.heading.split("\n").length - 1 ? <br /> : null}
+                    </span>
+                  ))}
+                </h2>
+                <img
+                  src={diagnosis.thumbnail}
+                  alt={diagnosis.title}
+                  className="aspect-video w-full rounded-[24px] border border-white/90 object-cover shadow-[0_14px_34px_rgba(87,93,139,0.14)]"
+                />
+                <p className="font-bold leading-7 text-slate-600">{diagnosis.description}</p>
+              </div>
+              <ButtonLink href={diagnosis.createPath} className="min-h-14 w-full">
+                {diagnosis.title}を作る
+              </ButtonLink>
+            </div>
+          </div>
+        ))}
       </section>
 
       <section id="how-to" className="space-y-3 py-6">

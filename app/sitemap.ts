@@ -1,9 +1,17 @@
 import type { MetadataRoute } from "next";
+import { DIAGNOSIS_CONFIGS } from "@/lib/diagnosis-config";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://wakarite.shirume.me";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
+
+  const createPages = DIAGNOSIS_CONFIGS.filter((config) => config.createPath !== "/create").map((config) => ({
+    url: `${siteUrl}${config.createPath}`,
+    lastModified: now,
+    changeFrequency: "weekly" as const,
+    priority: 0.8
+  }));
 
   return [
     {
@@ -18,24 +26,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 0.9
     },
-    {
-      url: `${siteUrl}/create/ultimate`,
-      lastModified: now,
-      changeFrequency: "weekly",
-      priority: 0.8
-    },
-    {
-      url: `${siteUrl}/create/private`,
-      lastModified: now,
-      changeFrequency: "weekly",
-      priority: 0.8
-    },
-    {
-      url: `${siteUrl}/create/vtuber`,
-      lastModified: now,
-      changeFrequency: "weekly",
-      priority: 0.8
-    },
+    ...createPages,
     {
       url: `${siteUrl}/guide`,
       lastModified: now,
