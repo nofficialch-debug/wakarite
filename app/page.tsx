@@ -151,13 +151,14 @@ function DiagnosisTags({ diagnosis, className = "" }: { diagnosis: DiagnosisConf
 
 function DiagnosisCard({ diagnosis }: { diagnosis: DiagnosisConfig }) {
   const headingLines = diagnosis.heading.split("\n");
+  const titleClassName = diagnosis.type === "vtuber" ? "diagnosis-title diagnosis-title-compact" : "diagnosis-title";
 
   return (
     <div className={`diagnosis-card ${diagnosis.accentClass}`}>
       <div className="space-y-5">
         <DiagnosisTags diagnosis={diagnosis} />
         <div className="space-y-3">
-          <h2 className="diagnosis-title">
+          <h2 className={titleClassName}>
             {headingLines.map((line, index) => (
               <span key={line}>
                 {line}

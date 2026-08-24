@@ -111,9 +111,19 @@ input {
   text-shadow: 0 3px 0 rgba(255, 255, 255, 0.92);
 }
 
+.diagnosis-title-compact {
+  font-size: 1.55rem;
+  line-height: 1.18;
+}
+
 @media (min-width: 640px) {
   .diagnosis-title {
     font-size: 2.5rem;
     line-height: 1.02;
+  }
+
+  .diagnosis-title-compact {
+    font-size: 2rem;
+    line-height: 1.1;
   }
 }
