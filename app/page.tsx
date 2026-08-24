@@ -69,45 +69,85 @@ const diagnosisCategories: Array<{
   id: string;
   title: string;
   lead: string;
+  tone: string;
   types: QuestionBankType[];
 }> = [
   {
     id: "love",
     title: "恋愛・人間関係",
     lead: "恋愛観や本音、人との距離感がわかる診断",
+    tone: "from-pink-50 to-rose-50 text-rose-600 ring-rose-100 hover:shadow-[0_12px_28px_rgba(244,63,94,0.14)]",
     types: ["renai", "ura", "ultimate"]
   },
   {
     id: "oshi",
     title: "推し活",
     lead: "推しへの愛やグッズ、現場での行動がわかる診断",
+    tone: "from-fuchsia-50 to-pink-50 text-fuchsia-600 ring-fuchsia-100 hover:shadow-[0_12px_28px_rgba(217,70,239,0.14)]",
     types: ["oshikatsu", "otaku_oshikatsu"]
   },
   {
     id: "life",
     title: "生活・好み",
     lead: "毎日の過ごし方や好きなものがわかる診断",
+    tone: "from-emerald-50 to-sky-50 text-emerald-600 ring-emerald-100 hover:shadow-[0_12px_28px_rgba(16,185,129,0.14)]",
     types: ["private", "food", "smartphone", "money"]
   },
   {
     id: "school-work",
     title: "学校・仕事",
     lead: "学校生活や働き方のタイプがわかる診断",
+    tone: "from-blue-50 to-cyan-50 text-blue-600 ring-blue-100 hover:shadow-[0_12px_28px_rgba(37,99,235,0.14)]",
     types: ["school", "work"]
   },
   {
     id: "values",
     title: "もしも・価値観",
     lead: "迷う選択から価値観や本音が見える診断",
+    tone: "from-amber-50 to-orange-50 text-orange-600 ring-orange-100 hover:shadow-[0_12px_28px_rgba(249,115,22,0.14)]",
     types: ["moshimo", "ultimate"]
   },
   {
     id: "vtuber",
     title: "VTuber専用",
     lead: "配信やリスナー参加企画で盛り上がりやすい診断",
+    tone: "from-sky-50 to-violet-50 text-sky-600 ring-sky-100 hover:shadow-[0_12px_28px_rgba(14,165,233,0.14)]",
     types: ["vtuber"]
   }
 ];
+
+function formatCountRange(countOptions: DiagnosisConfig["countOptions"]) {
+  if (countOptions.length === 0) return "";
+  const min = countOptions[0];
+  const max = countOptions[countOptions.length - 1];
+  return min === max ? `${min}問で作成` : `${min}〜${max}問で作成`;
+}
+
+function DiagnosisTags({ diagnosis, className = "" }: { diagnosis: DiagnosisConfig; className?: string }) {
+  const tags = [
+    diagnosis.title,
+    `${diagnosis.choiceCount}択`,
+    formatCountRange(diagnosis.countOptions),
+    `全${diagnosis.questionTotal}問`
+  ];
+
+  return (
+    <div className={`flex flex-wrap items-center gap-2 ${className}`}>
+      {tags.map((tag, index) => (
+        <span
+          key={`${diagnosis.type}-${tag}`}
+          className={`inline-flex rounded-full px-3 py-2 text-xs font-black ring-1 ring-white/90 ${
+            index === 0
+              ? "bg-white/90 text-candy shadow-[0_10px_24px_rgba(255,119,183,0.14)]"
+              : "bg-white/72 text-slate-500"
+          }`}
+        >
+          {tag}
+        </span>
+      ))}
+    </div>
+  );
+}
 
 function DiagnosisCard({ diagnosis }: { diagnosis: DiagnosisConfig }) {
   const headingLines = diagnosis.heading.split("\n");
@@ -115,14 +155,7 @@ function DiagnosisCard({ diagnosis }: { diagnosis: DiagnosisConfig }) {
   return (
     <div className={`diagnosis-card ${diagnosis.accentClass}`}>
       <div className="space-y-5">
-        <div className="flex flex-wrap items-center gap-2">
-          <p className="inline-flex rounded-full bg-white/90 px-4 py-2 text-sm font-black text-candy shadow-[0_10px_24px_rgba(255,119,183,0.14)] ring-1 ring-white">
-            {diagnosis.label}
-          </p>
-          <p className="inline-flex rounded-full bg-white/70 px-3 py-2 text-xs font-black text-slate-500 ring-1 ring-white/90">
-            {diagnosis.badge}
-          </p>
-        </div>
+        <DiagnosisTags diagnosis={diagnosis} />
         <div className="space-y-3">
           <h2 className="diagnosis-title">
             {headingLines.map((line, index) => (
@@ -148,6 +181,8 @@ function DiagnosisCard({ diagnosis }: { diagnosis: DiagnosisConfig }) {
 }
 
 export default function HomePage() {
+  const standardDiagnosis = getDiagnosisConfig("standard");
+
   return (
     <AppShell>
       <section className="mb-5 rounded-[26px] border border-white/90 bg-white/72 px-5 py-5 text-center shadow-[0_12px_32px_rgba(87,93,139,0.09)] backdrop-blur-md">
@@ -161,14 +196,7 @@ export default function HomePage() {
 
       <section className="diagnosis-card diagnosis-card-standard">
         <div className="space-y-5">
-          <div className="flex flex-wrap items-center gap-2">
-            <p className="inline-flex rounded-full bg-white/88 px-4 py-2 text-sm font-black text-candy shadow-[0_10px_26px_rgba(255,119,183,0.18)] ring-1 ring-white">
-              定番のワカリテ
-            </p>
-            <p className="inline-flex rounded-full bg-white/72 px-3 py-2 text-xs font-black text-sky-500 ring-1 ring-white/90">
-              20〜100問でチェック
-            </p>
-          </div>
+          <DiagnosisTags diagnosis={standardDiagnosis} />
           <h1 className="diagnosis-title">
             わたしのこと、
             <br />
@@ -203,7 +231,7 @@ export default function HomePage() {
             <Link
               key={category.id}
               href={`#${category.id}`}
-              className="flex min-h-14 items-center justify-center rounded-2xl bg-white px-3 py-3 text-center text-sm font-black text-ink shadow-[0_8px_22px_rgba(87,93,139,0.08)] ring-1 ring-slate-100 transition hover:-translate-y-0.5 hover:text-candy hover:shadow-[0_12px_28px_rgba(255,119,183,0.14)]"
+              className={`flex min-h-14 items-center justify-center rounded-2xl bg-gradient-to-br px-3 py-3 text-center text-sm font-black shadow-[0_8px_22px_rgba(87,93,139,0.08)] ring-1 transition hover:-translate-y-0.5 ${category.tone}`}
             >
               {category.title}
             </Link>
