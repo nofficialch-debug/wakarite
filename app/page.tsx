@@ -3,7 +3,9 @@ import type { Metadata } from "next";
 import { AppShell } from "@/components/AppShell";
 import { ButtonLink } from "@/components/Button";
 import { Card } from "@/components/Card";
-import { ADDITIONAL_DIAGNOSIS_CONFIGS } from "@/lib/diagnosis-config";
+import { getDiagnosisConfig } from "@/lib/diagnosis-config";
+import type { DiagnosisConfig } from "@/lib/diagnosis-config";
+import type { QuestionBankType } from "@/lib/types";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3001";
 const siteTitle = "ワカリテ｜私とあなたのワカリテ診断";
@@ -63,6 +65,88 @@ const steps = [
   }
 ];
 
+const diagnosisCategories: Array<{
+  id: string;
+  title: string;
+  lead: string;
+  types: QuestionBankType[];
+}> = [
+  {
+    id: "love",
+    title: "恋愛・人間関係",
+    lead: "恋愛観や本音、人との距離感がわかる診断",
+    types: ["renai", "ura", "ultimate"]
+  },
+  {
+    id: "oshi",
+    title: "推し活",
+    lead: "推しへの愛やグッズ、現場での行動がわかる診断",
+    types: ["oshikatsu", "otaku_oshikatsu"]
+  },
+  {
+    id: "life",
+    title: "生活・好み",
+    lead: "毎日の過ごし方や好きなものがわかる診断",
+    types: ["private", "food", "smartphone", "money"]
+  },
+  {
+    id: "school-work",
+    title: "学校・仕事",
+    lead: "学校生活や働き方のタイプがわかる診断",
+    types: ["school", "work"]
+  },
+  {
+    id: "values",
+    title: "もしも・価値観",
+    lead: "迷う選択から価値観や本音が見える診断",
+    types: ["moshimo", "ultimate"]
+  },
+  {
+    id: "vtuber",
+    title: "VTuber専用",
+    lead: "配信やリスナー参加企画で盛り上がりやすい診断",
+    types: ["vtuber"]
+  }
+];
+
+function DiagnosisCard({ diagnosis }: { diagnosis: DiagnosisConfig }) {
+  const headingLines = diagnosis.heading.split("\n");
+
+  return (
+    <div className={`diagnosis-card ${diagnosis.accentClass}`}>
+      <div className="space-y-5">
+        <div className="flex flex-wrap items-center gap-2">
+          <p className="inline-flex rounded-full bg-white/90 px-4 py-2 text-sm font-black text-candy shadow-[0_10px_24px_rgba(255,119,183,0.14)] ring-1 ring-white">
+            {diagnosis.label}
+          </p>
+          <p className="inline-flex rounded-full bg-white/70 px-3 py-2 text-xs font-black text-slate-500 ring-1 ring-white/90">
+            {diagnosis.badge}
+          </p>
+        </div>
+        <div className="space-y-3">
+          <h2 className="diagnosis-title">
+            {headingLines.map((line, index) => (
+              <span key={line}>
+                {line}
+                {index < headingLines.length - 1 ? <br /> : null}
+              </span>
+            ))}
+          </h2>
+          <img
+            src={diagnosis.thumbnail}
+            alt={diagnosis.title}
+            className="aspect-video w-full rounded-[24px] border border-white/90 object-cover shadow-[0_14px_34px_rgba(87,93,139,0.14)]"
+          />
+          <p className="font-bold leading-7 text-slate-600">{diagnosis.description}</p>
+        </div>
+        <ButtonLink href={diagnosis.createPath} className="min-h-14 w-full">
+          {diagnosis.title}を作る
+        </ButtonLink>
+      </div>
+    </div>
+  );
+}
+
 export default function HomePage() {
   return (
     <AppShell>
@@ -108,130 +192,36 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="diagnosis-card diagnosis-card-ultimate mt-5">
-        <div className="space-y-5">
-          <div className="flex flex-wrap items-center gap-2">
-            <p className="inline-flex rounded-full bg-white/90 px-4 py-2 text-sm font-black text-orange-600 shadow-[0_10px_24px_rgba(255,93,108,0.14)] ring-1 ring-white">
-              究極の2択ワカリテ
-            </p>
-            <p className="inline-flex rounded-full bg-white/70 px-3 py-2 text-xs font-black text-violet-600 ring-1 ring-white/90">
-              2択・10〜30問
-            </p>
-          </div>
-          <div className="space-y-3">
-            <h2 className="diagnosis-title">
-              本人も悩みまくる!?
-              <br />
-              究極の2択
-            </h2>
-            <img
-              src="/ultimate-wakarite-thumbnail-v2.png"
-              alt="究極の2択ワカリテ"
-              className="aspect-video w-full rounded-[24px] border border-white/90 object-cover shadow-[0_14px_34px_rgba(255,93,108,0.16)]"
-            />
-            <p className="font-bold leading-7 text-slate-600">
-              恋愛、人生、お金、もしもの選択など、本人の価値観が見える究極の2択診断です。
-            </p>
-          </div>
-          <ButtonLink href="/create/ultimate" className="min-h-14 w-full">
-            究極の2択ワカリテを作る
-          </ButtonLink>
+      <section className="mt-5 rounded-[26px] border border-white/90 bg-white/76 px-5 py-5 shadow-[0_12px_32px_rgba(87,93,139,0.09)] backdrop-blur-md">
+        <div className="space-y-2">
+          <p className="text-sm font-black text-candy">CATEGORY</p>
+          <h2 className="text-2xl font-black leading-tight">気になるワカリテを探す</h2>
+          <p className="text-sm font-bold leading-7 text-slate-600">カテゴリを押すと、下の診断一覧まで移動できます。</p>
+        </div>
+        <div className="mt-4 grid grid-cols-2 gap-2">
+          {diagnosisCategories.map((category) => (
+            <Link
+              key={category.id}
+              href={`#${category.id}`}
+              className="flex min-h-14 items-center justify-center rounded-2xl bg-white px-3 py-3 text-center text-sm font-black text-ink shadow-[0_8px_22px_rgba(87,93,139,0.08)] ring-1 ring-slate-100 transition hover:-translate-y-0.5 hover:text-candy hover:shadow-[0_12px_28px_rgba(255,119,183,0.14)]"
+            >
+              {category.title}
+            </Link>
+          ))}
         </div>
       </section>
 
-      <section className="diagnosis-card diagnosis-card-private mt-5">
-        <div className="space-y-5">
-          <div className="flex flex-wrap items-center gap-2">
-            <p className="inline-flex rounded-full bg-white/90 px-4 py-2 text-sm font-black text-orange-600 shadow-[0_10px_24px_rgba(255,138,77,0.14)] ring-1 ring-white">
-              プライベートワカリテ
-            </p>
-            <p className="inline-flex rounded-full bg-white/70 px-3 py-2 text-xs font-black text-candy ring-1 ring-white/90">
-              4択・10〜30問
-            </p>
-          </div>
-          <div className="space-y-3">
-            <h2 className="diagnosis-title">
-              誰も知らない!?
-              <br />
-              プライベートの実態
-            </h2>
-            <img
-              src="/private-wakarite-thumbnail.png"
-              alt="プライベートワカリテ"
-              className="aspect-video w-full rounded-[24px] border border-white/90 object-cover shadow-[0_14px_34px_rgba(87,69,139,0.18)]"
-            />
-            <p className="font-bold leading-7 text-slate-600">
-              寝方、スマホ、家での過ごし方など、近い人ほど盛り上がるプライベート診断です。
-            </p>
-          </div>
-          <ButtonLink href="/create/private" className="min-h-14 w-full">
-            プライベートワカリテを作る
-          </ButtonLink>
-        </div>
-      </section>
-
-      <section className="diagnosis-card diagnosis-card-vtuber mt-5">
-        <div className="space-y-5">
-          <div className="flex flex-wrap items-center gap-2">
-            <p className="inline-flex rounded-full bg-white/90 px-4 py-2 text-sm font-black text-blue-700 shadow-[0_10px_24px_rgba(35,167,242,0.14)] ring-1 ring-white">
-              VTuber向け
-            </p>
-            <p className="inline-flex rounded-full bg-white/70 px-3 py-2 text-xs font-black text-candy ring-1 ring-white/90">
-              配信で盛り上がる2択
-            </p>
-          </div>
-          <div className="space-y-3">
-            <h2 className="diagnosis-title">
-              推しのこと、
-              <br />
-              どれだけわかってる？
-            </h2>
-            <img
-              src="/vtuber-wakarite-thumbnail-v2.png"
-              alt="VTuberワカリテ"
-              className="aspect-video w-full rounded-[24px] border border-white/90 object-cover shadow-[0_14px_34px_rgba(35,167,242,0.16)]"
-            />
-            <p className="font-bold leading-7 text-slate-600">
-              配信ネタ・口ぐせ・ファンならわかる好みで、リスナー参加型のワカリテ診断を作れます。
-            </p>
-          </div>
-          <ButtonLink href="/create/vtuber" className="min-h-14 w-full">
-            VTuberワカリテを作る
-          </ButtonLink>
-        </div>
-      </section>
-
-      <section className="mt-5 space-y-5">
-        {ADDITIONAL_DIAGNOSIS_CONFIGS.map((diagnosis) => (
-          <div key={diagnosis.type} className={`diagnosis-card ${diagnosis.accentClass}`}>
+      <section className="mt-6 space-y-8">
+        {diagnosisCategories.map((category) => (
+          <div key={category.id} id={category.id} className="scroll-mt-6 space-y-3">
+            <div className="space-y-1 px-1">
+              <h2 className="text-2xl font-black leading-tight">{category.title}</h2>
+              <p className="text-sm font-bold leading-7 text-slate-600">{category.lead}</p>
+            </div>
             <div className="space-y-5">
-              <div className="flex flex-wrap items-center gap-2">
-                <p className="inline-flex rounded-full bg-white/90 px-4 py-2 text-sm font-black text-candy shadow-[0_10px_24px_rgba(255,119,183,0.14)] ring-1 ring-white">
-                  {diagnosis.label}
-                </p>
-                <p className="inline-flex rounded-full bg-white/70 px-3 py-2 text-xs font-black text-slate-500 ring-1 ring-white/90">
-                  {diagnosis.badge}
-                </p>
-              </div>
-              <div className="space-y-3">
-                <h2 className="diagnosis-title">
-                  {diagnosis.heading.split("\n").map((line, index) => (
-                    <span key={line}>
-                      {line}
-                      {index < diagnosis.heading.split("\n").length - 1 ? <br /> : null}
-                    </span>
-                  ))}
-                </h2>
-                <img
-                  src={diagnosis.thumbnail}
-                  alt={diagnosis.title}
-                  className="aspect-video w-full rounded-[24px] border border-white/90 object-cover shadow-[0_14px_34px_rgba(87,93,139,0.14)]"
-                />
-                <p className="font-bold leading-7 text-slate-600">{diagnosis.description}</p>
-              </div>
-              <ButtonLink href={diagnosis.createPath} className="min-h-14 w-full">
-                {diagnosis.title}を作る
-              </ButtonLink>
+              {category.types.map((type) => (
+                <DiagnosisCard key={`${category.id}-${type}`} diagnosis={getDiagnosisConfig(type)} />
+              ))}
             </div>
           </div>
         ))}
