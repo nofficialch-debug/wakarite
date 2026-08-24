@@ -1,6 +1,14 @@
 import Link from "next/link";
 import { AppShell } from "@/components/AppShell";
 import { Card } from "@/components/Card";
+import { createPageMetadata } from "@/lib/metadata";
+
+export const metadata = createPageMetadata({
+  title: "よくある質問｜ワカリテ",
+  description:
+    "ワカリテの診断作成、共有リンク、ランキング、4択診断、個人情報の扱いなど、よくある質問をまとめています。",
+  path: "/faq"
+});
 
 const faqs = [
   {
@@ -9,7 +17,7 @@ const faqs = [
   },
   {
     question: "診断は何問で作れますか？",
-    answer: "20問、30問、50問、75問、100問から選べます。気軽に遊ぶなら20問、配信や企画でしっかり盛り上げるなら50問以上がおすすめです。"
+    answer: "診断の種類によって選べる問題数が変わります。多くの4択ワカリテは10問、20問、30問から、定番やVTuber向けは20問、30問、50問、75問、100問から選べます。"
   },
   {
     question: "答えにくい質問が出たらどうすればいいですか？",
@@ -37,7 +45,7 @@ const faqs = [
   },
   {
     question: "4択診断は作れますか？",
-    answer: "プライベートワカリテは4択診断として作れます。定番のワカリテとVTuberワカリテは2択診断です。"
+    answer: "プライベート、恋愛、推し活、食べ物、学校、仕事、スマホの中身、お金の使い方などは4択診断です。定番、VTuber、究極の2択は2択診断です。"
   },
   {
     question: "個人情報の扱いはどうなっていますか？",

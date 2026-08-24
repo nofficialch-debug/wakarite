@@ -1,5 +1,13 @@
 import { AppShell } from "@/components/AppShell";
 import { Card } from "@/components/Card";
+import { createPageMetadata } from "@/lib/metadata";
+
+export const metadata = createPageMetadata({
+  title: "プライバシーポリシー｜ワカリテ",
+  description:
+    "ワカリテで取得する情報、診断作成・共有・ランキング表示での利用目的、Cookieやアクセス解析、個人情報の取り扱いについて説明します。",
+  path: "/privacy"
+});
 
 const sections = [
   {

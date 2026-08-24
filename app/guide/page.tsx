@@ -2,11 +2,19 @@ import Link from "next/link";
 import { AppShell } from "@/components/AppShell";
 import { ButtonLink } from "@/components/Button";
 import { Card } from "@/components/Card";
+import { createPageMetadata } from "@/lib/metadata";
+
+export const metadata = createPageMetadata({
+  title: "ワカリテの使い方｜診断の作り方・遊び方",
+  description:
+    "ワカリテで診断を作る手順、友達に共有する方法、ランキングの見方をわかりやすく紹介します。2択・4択のワカリテ診断を初めて使う方はこちら。",
+  path: "/guide"
+});
 
 const creatorSteps = [
   {
     title: "1. 診断タイプを選ぶ",
-    body: "定番のワカリテ、またはVTuberワカリテから作りたい診断を選びます。"
+    body: "定番、恋愛、推し活、プライベート、もしも、VTuberなど、作りたいワカリテ診断を選びます。"
   },
   {
     title: "2. 名前を入力する",
@@ -14,7 +22,7 @@ const creatorSteps = [
   },
   {
     title: "3. 問題数を選ぶ",
-    body: "20問、30問、50問、75問、100問から選べます。気軽に遊ぶなら20問、しっかり盛り上げたいなら50問以上がおすすめです。"
+    body: "診断ごとに10問、20問、30問などから選べます。定番やVTuber向けは50問以上の長めの診断も作れます。"
   },
   {
     title: "4. 本人の答えを選ぶ",

@@ -1,5 +1,13 @@
 import { AppShell } from "@/components/AppShell";
 import { Card } from "@/components/Card";
+import { createPageMetadata } from "@/lib/metadata";
+
+export const metadata = createPageMetadata({
+  title: "利用規約｜ワカリテ",
+  description:
+    "ワカリテの利用条件、禁止事項、診断内容の取り扱い、免責事項などをまとめた利用規約です。",
+  path: "/terms"
+});
 
 const sections = [
   {
