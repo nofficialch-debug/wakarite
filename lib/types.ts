@@ -5,6 +5,7 @@ export type QuestionCount = 10 | 20 | 30 | 50 | 75 | 100;
 export type QuestionBankType =
   | "standard"
   | "vtuber"
+  | "vtuber4"
   | "private"
   | "ultimate"
   | "otaku_oshikatsu"

@@ -75,6 +75,20 @@ export const DIAGNOSIS_CONFIGS: DiagnosisConfig[] = [
     countOptions: [20, 30, 50, 75, 100]
   },
   {
+    type: "vtuber4",
+    label: "4択VTuberワカリテ",
+    title: "4択VTuberワカリテ",
+    heading: "意外と難しい!?\n4択VTuberワカリテを作ろう",
+    description: "リスナーや友達にワカリテ診断をやってもらうために、あなたの4択VTuberワカリテを作りませんか？",
+    badge: "配信で盛り上がる4択",
+    choiceCount: 4,
+    questionTotal: 100,
+    thumbnail: "/vtuber4-wakarite-thumbnail.png",
+    accentClass: "diagnosis-card-private",
+    createPath: "/create/vtuber-4choice",
+    countOptions: FOUR_CHOICE_COUNT_OPTIONS
+  },
+  {
     type: "otaku_oshikatsu",
     label: "オタク度高めの推し活ワカリテ",
     title: "オタク度高めの推し活ワカリテ",
@@ -217,7 +231,7 @@ export const DIAGNOSIS_CONFIGS: DiagnosisConfig[] = [
 ];
 
 export const ADDITIONAL_DIAGNOSIS_CONFIGS = DIAGNOSIS_CONFIGS.filter((config) =>
-  ["otaku_oshikatsu", "oshikatsu", "moshimo", "renai", "ura", "food", "school", "work", "smartphone", "money"].includes(config.type)
+  ["vtuber4", "otaku_oshikatsu", "oshikatsu", "moshimo", "renai", "ura", "food", "school", "work", "smartphone", "money"].includes(config.type)
 );
 
 export function getDiagnosisConfig(type: QuestionBankType) {

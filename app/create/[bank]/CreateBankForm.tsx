@@ -11,14 +11,16 @@ type Props = {
   bankType: QuestionBankType;
   modeLabel: string;
   title: string;
+  heading?: string;
   description: string;
   thumbnail: string;
 };
 
-export default function CreateBankForm({ bankType, modeLabel, title, description, thumbnail }: Props) {
+export default function CreateBankForm({ bankType, modeLabel, title, heading, description, thumbnail }: Props) {
   const router = useRouter();
   const [name, setName] = useState("");
   const [error, setError] = useState("");
+  const headingLines = (heading || `${title}を作ろう`).split("\n");
 
   function submit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -38,7 +40,14 @@ export default function CreateBankForm({ bankType, modeLabel, title, description
       <Card className="space-y-6">
         <div className="space-y-2">
           <p className="text-sm font-black text-candy">{modeLabel}</p>
-          <h1 className="text-3xl font-black leading-tight">{title}を作ろう</h1>
+          <h1 className="text-3xl font-black leading-tight">
+            {headingLines.map((line, index) => (
+              <span key={line}>
+                {line}
+                {index < headingLines.length - 1 ? <br /> : null}
+              </span>
+            ))}
+          </h1>
           <img
             src={thumbnail}
             alt={title}

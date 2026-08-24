@@ -51,6 +51,7 @@ export default function CreateBankPage({ params }: { params: { bank: string } })
       bankType={diagnosis.type}
       modeLabel={diagnosis.badge}
       title={diagnosis.title}
+      heading={diagnosis.type === "vtuber4" ? diagnosis.heading : undefined}
       description={diagnosis.description}
       thumbnail={diagnosis.thumbnail}
     />

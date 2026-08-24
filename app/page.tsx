@@ -112,7 +112,7 @@ const diagnosisCategories: Array<{
     title: "VTuber専用",
     lead: "配信やリスナー参加企画で盛り上がりやすい診断",
     tone: "from-sky-50 to-violet-50 text-sky-600 ring-sky-100 hover:shadow-[0_12px_28px_rgba(14,165,233,0.14)]",
-    types: ["vtuber"]
+    types: ["vtuber", "vtuber4"]
   }
 ];
 
@@ -151,7 +151,7 @@ function DiagnosisTags({ diagnosis, className = "" }: { diagnosis: DiagnosisConf
 
 function DiagnosisCard({ diagnosis }: { diagnosis: DiagnosisConfig }) {
   const headingLines = diagnosis.heading.split("\n");
-  const titleClassName = diagnosis.type === "vtuber" ? "diagnosis-title diagnosis-title-compact" : "diagnosis-title";
+  const titleClassName = ["vtuber", "vtuber4"].includes(diagnosis.type) ? "diagnosis-title diagnosis-title-compact" : "diagnosis-title";
 
   return (
     <div className={`diagnosis-card ${diagnosis.accentClass}`}>

@@ -5,7 +5,7 @@ create table if not exists public.quizzes (
   slug text not null unique,
   creator_name text not null check (char_length(creator_name) between 1 and 20),
   manage_token text not null,
-  bank_type text not null default 'standard' check (bank_type in ('standard', 'vtuber', 'private', 'ultimate', 'otaku_oshikatsu', 'oshikatsu', 'moshimo', 'renai', 'ura', 'food', 'school', 'work', 'smartphone', 'money')),
+  bank_type text not null default 'standard' check (bank_type in ('standard', 'vtuber', 'vtuber4', 'private', 'ultimate', 'otaku_oshikatsu', 'oshikatsu', 'moshimo', 'renai', 'ura', 'food', 'school', 'work', 'smartphone', 'money')),
   created_at timestamptz not null default now()
 );
 
@@ -17,7 +17,7 @@ begin
   alter table public.quizzes
     drop constraint if exists quizzes_bank_type_check;
   alter table public.quizzes
-    add constraint quizzes_bank_type_check check (bank_type in ('standard', 'vtuber', 'private', 'ultimate', 'otaku_oshikatsu', 'oshikatsu', 'moshimo', 'renai', 'ura', 'food', 'school', 'work', 'smartphone', 'money'));
+    add constraint quizzes_bank_type_check check (bank_type in ('standard', 'vtuber', 'vtuber4', 'private', 'ultimate', 'otaku_oshikatsu', 'oshikatsu', 'moshimo', 'renai', 'ura', 'food', 'school', 'work', 'smartphone', 'money'));
 exception
   when duplicate_object then null;
 end $$;
